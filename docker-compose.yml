@@ -1,0 +1,20 @@
+version: "3"
+services:
+  reservation_redis:
+    image: redis:alpine
+    container_name: reservation_redis
+    restart: on-failure
+    ports:
+      - 6379:6379
+  reservation_mongo:
+    image: "mongo:4.4.3"
+    container_name: reservation_mongo
+    hostname: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+      MONGO_INITDB_DATABASE: admin
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongodb:/data/db
